@@ -3,7 +3,7 @@
 Run the following commands in your terminal. It will prompt you before it does anything destructive. Check out the `Rakefile` to see exactly what it does.
 
 ```terminal
-git clone git://github.com/ryanb/dotfiles ~/.dotfiles
+git clone git://github.com/abarre/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 rake install
 ```
