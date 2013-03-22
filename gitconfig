@@ -1,0 +1,38 @@
+[user]
+	name = abarre
+	email = anthony.barre87@gmail.com
+[alias]
+	co = checkout
+	st = status
+
+	# modify the last commit
+	amend = commit --amend
+
+	#show the log for a file
+	filelog = log -u
+
+	#show the current changes
+	changes = diff --name-status
+
+	#show the history in oneline
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+
+	#show the history with the commit details
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+	#undo the last commit
+	undo = reset --soft HEAD^
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	excludesfile = ~/.gitignore
+	editor = subl
+	autocrlf = input
+[apply]
+	whitespace = nowarn
+[format]
+	pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+[push]
+	default = simple
