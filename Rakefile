@@ -3,37 +3,38 @@ require 'erb'
 
 desc "install the dot files into user's home directory"
 task :install do
+  install_color_terminal
   install_oh_my_zsh
   switch_to_zsh
+  configure_vim
   replace_all = false
-  files = Dir['*'] - %w[Rakefile README.rdoc LICENSE oh-my-zsh]
-  files << "oh-my-zsh/custom/plugins/rbates"
-  files << "oh-my-zsh/custom/rbates.zsh-theme"
-  files.each do |file|
-    system %Q{mkdir -p "$HOME/.#{File.dirname(file)}"} if file =~ /\//
-    if File.exist?(File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}"))
-      if File.identical? file, File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}")
-        puts "identical ~/.#{file.sub(/\.erb$/, '')}"
-      elsif replace_all
-        replace_file(file)
-      else
-        print "overwrite ~/.#{file.sub(/\.erb$/, '')}? [ynaq] "
-        case $stdin.gets.chomp
-        when 'a'
-          replace_all = true
-          replace_file(file)
-        when 'y'
-          replace_file(file)
-        when 'q'
-          exit
-        else
-          puts "skipping ~/.#{file.sub(/\.erb$/, '')}"
-        end
-      end
-    else
-      link_file(file)
-    end
-  end
+  # files = Dir['*'] - %w[Rakefile README.rdoc LICENSE]
+
+  # files.each do |file|
+  #   system %Q{mkdir -p "$HOME/.#{File.dirname(file)}"} if file =~ /\//
+  #   if File.exist?(File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}"))
+  #     if File.identical? file, File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}")
+  #       puts "identical ~/.#{file.sub(/\.erb$/, '')}"
+  #     elsif replace_all
+  #       replace_file(file)
+  #     else
+  #       print "overwrite ~/.#{file.sub(/\.erb$/, '')}? [ynaq] "
+  #       case $stdin.gets.chomp
+  #       when 'a'
+  #         replace_all = true
+  #         replace_file(file)
+  #       when 'y'
+  #         replace_file(file)
+  #       when 'q'
+  #         exit
+  #       else
+  #         puts "skipping ~/.#{file.sub(/\.erb$/, '')}"
+  #       end
+  #     end
+  #   else
+  #     link_file(file)
+  #   end
+  # end
 end
 
 def replace_file(file)
@@ -73,6 +74,17 @@ def switch_to_zsh
   end
 end
 
+def install_color_terminal
+  print "did you install the color for the terminal? [yn] "
+  case $stdin.gets.chomp
+  when 'y'
+    return
+  else
+    print "look at the colorTerminal folder for the instruction"
+    exit
+  end
+end
+
 def install_oh_my_zsh
   if File.exist?(File.join(ENV['HOME'], ".oh-my-zsh"))
     puts "found ~/.oh-my-zsh"
@@ -86,6 +98,22 @@ def install_oh_my_zsh
       exit
     else
       puts "skipping oh-my-zsh, you will need to change ~/.zshrc"
+    end
+  end
+
+  def configure_vim
+    print "install the vimrc and the vim color [ynq] "
+    case $stdin.gets.chomp
+    when 'y'
+      puts "installing vim"
+      system %Q{ln -s "$PWD/vimrc" "$HOME/.vimrc"}
+      system %Q{mkdir -p ~/.vim/autoload ~/.vim/bundle}
+      system %Q{curl -Sso ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim}
+      system %Q{cd ~/.vim/bundle && git clone git://github.com/altercation/vim-colors-solarized.git}
+    when 'q'
+      exit
+    else
+      puts "skipping vim configuration"
     end
   end
 end

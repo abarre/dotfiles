@@ -1,9 +1,12 @@
 " Désactiver le mode compatibilité
 set  nocp
 
+execute pathogen#infect()
+
 " Activer la coloration et l'indentation
-filetype on
-colorscheme koehler
+set background=dark
+colorscheme solarized
+
 filetype plugin indent on
 syntax on
 
