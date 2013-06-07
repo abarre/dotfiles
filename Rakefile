@@ -8,33 +8,33 @@ task :install do
   switch_to_zsh
   configure_vim
   replace_all = false
-  # files = Dir['*'] - %w[Rakefile README.rdoc LICENSE]
+  files = Dir['*'] - %w[Rakefile README.md LICENSE colorTerminal vimrc]
 
-  # files.each do |file|
-  #   system %Q{mkdir -p "$HOME/.#{File.dirname(file)}"} if file =~ /\//
-  #   if File.exist?(File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}"))
-  #     if File.identical? file, File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}")
-  #       puts "identical ~/.#{file.sub(/\.erb$/, '')}"
-  #     elsif replace_all
-  #       replace_file(file)
-  #     else
-  #       print "overwrite ~/.#{file.sub(/\.erb$/, '')}? [ynaq] "
-  #       case $stdin.gets.chomp
-  #       when 'a'
-  #         replace_all = true
-  #         replace_file(file)
-  #       when 'y'
-  #         replace_file(file)
-  #       when 'q'
-  #         exit
-  #       else
-  #         puts "skipping ~/.#{file.sub(/\.erb$/, '')}"
-  #       end
-  #     end
-  #   else
-  #     link_file(file)
-  #   end
-  # end
+  files.each do |file|
+    system %Q{mkdir -p "$HOME/.#{File.dirname(file)}"} if file =~ /\//
+    if File.exist?(File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}"))
+      if File.identical? file, File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}")
+        puts "identical ~/.#{file.sub(/\.erb$/, '')}"
+      elsif replace_all
+        replace_file(file)
+      else
+        print "overwrite ~/.#{file.sub(/\.erb$/, '')}? [ynaq] "
+        case $stdin.gets.chomp
+        when 'a'
+          replace_all = true
+          replace_file(file)
+        when 'y'
+          replace_file(file)
+        when 'q'
+          exit
+        else
+          puts "skipping ~/.#{file.sub(/\.erb$/, '')}"
+        end
+      end
+    else
+      link_file(file)
+    end
+  end
 end
 
 def replace_file(file)
