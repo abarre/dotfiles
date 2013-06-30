@@ -3,7 +3,6 @@ require 'erb'
 
 desc "install the dot files into user's home directory"
 task :install do
-  install_color_terminal
   install_oh_my_zsh
   switch_to_zsh
   configure_vim
@@ -71,17 +70,6 @@ def switch_to_zsh
     else
       puts "skipping zsh"
     end
-  end
-end
-
-def install_color_terminal
-  print "did you install the color for the terminal? [yn] "
-  case $stdin.gets.chomp
-  when 'y'
-    return
-  else
-    print "look at the colorTerminal folder for the instruction"
-    exit
   end
 end
 
