@@ -7,7 +7,7 @@ task :install do
   switch_to_zsh
   configure_vim
   replace_all = false
-  files = Dir['*'] - %w[Rakefile README.md LICENSE colorTerminal vimrc]
+  files = Dir['*'] - %w[Rakefile README.md LICENSE vimrc brew.sh osx.sh]
 
   files.each do |file|
     system %Q{mkdir -p "$HOME/.#{File.dirname(file)}"} if file =~ /\//
