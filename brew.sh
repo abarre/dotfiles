@@ -14,6 +14,9 @@ brew install ack
 brew install git
 brew install pigz
 brew install tree
+brew install autojump
+brew install curl
+brew install wget
 brew install webkit2png
 
 # Install native apps

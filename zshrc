@@ -40,7 +40,7 @@ MYSQL=/usr/local/mysql/bin
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 # Customize to your needs...
-export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:$MYSQL
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:$MYSQL
 
 . ~/.nvm/nvm.sh
 
