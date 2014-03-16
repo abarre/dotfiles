@@ -45,6 +45,7 @@ installcask gitx
 installcask skype
 installcask xquartz
 installcask vagrant
+installcask gmail-notifr
 
 # Remove outdated versions from the cellar
 brew cleanup
