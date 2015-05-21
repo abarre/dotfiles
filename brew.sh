@@ -36,16 +36,19 @@ installcask evernote
 installcask dropbox
 installcask google-chrome
 installcask iterm2
-installcask sublime-text
+installcask caskroom/versions/sublime-text3
 installcask the-unarchiver
 installcask virtualbox
 installcask vlc
-installcask adium
-installcask gitx
+installcask rowanj-gitx
 installcask skype
-installcask xquartz
 installcask vagrant
 installcask gmail-notifr
+installcask hipchat
+installcask spotify
+installcask cinch
+installcask joinme
+installcask bittorrent-sync
 
 # Remove outdated versions from the cellar
 brew cleanup
