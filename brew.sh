@@ -49,6 +49,7 @@ installcask spotify
 installcask cinch
 installcask joinme
 installcask bittorrent-sync
+installcask cord
 
 # Remove outdated versions from the cellar
 brew cleanup
